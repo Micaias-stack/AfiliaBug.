@@ -13,15 +13,25 @@ with col1:
     plataforma = st.multiselect(
         "Plataforma",
         ["Shopee", "Mercado Livre", "TikTok Shop", "Kwai Shop", "Amazon", "Magalu"],
-        default=["Shopee", "Mercado Livre", "TikTok Shop"]
+        default=["Shopee", "Mercado Livre", "TikTok Shop"],
     )
+
 with col2:
     categoria = st.selectbox(
         "Categoria",
-        ["Todas", "Eletrônicos", "Moda", "Casa", "Beleza", "Esportes", "Brinquedos"]
+        ["Todas", "Eletrônicos", "Moda", "Casa", "Beleza", "Esportes", "Brinquedos"],
     )
+
 with col3:
-    desconto_min = st.slider("Desconto mínimo", 30, 95, 60, suffix="%")
+    desconto_min = st.slider(
+        "Desconto mínimo (%)",
+        min_value=30,
+        max_value=95,
+        value=60,
+        step=1,
+        format="%d%%",
+    )
+
 with col4:
     ordenar = st.selectbox("Ordenar por", ["Mais recentes", "Maior desconto", "Menor preço"])
 
@@ -60,7 +70,10 @@ if plataforma:
 if categoria != "Todas":
     filtered = [p for p in filtered if p["cat"] == categoria]
 
-filtered = [p for p in filtered if ((p["original"] - p["bug"]) / p["original"] * 100) >= desconto_min]
+filtered = [
+    p for p in filtered
+    if ((p["original"] - p["bug"]) / p["original"] * 100) >= desconto_min
+]
 
 if ordenar == "Maior desconto":
     filtered.sort(key=lambda x: (x["original"] - x["bug"]) / x["original"], reverse=True)
@@ -111,22 +124,42 @@ st.subheader("🔔 Criar Alerta de Preço Bugado")
 
 with st.form("alerta_form"):
     ac1, ac2 = st.columns(2)
+
     with ac1:
-        alerta_produto = st.text_input("Produto ou palavra-chave", placeholder="Ex: iPhone, Air Fryer, Tênis...")
+        alerta_produto = st.text_input(
+            "Produto ou palavra-chave",
+            placeholder="Ex: iPhone, Air Fryer, Tênis...",
+        )
         alerta_plat = st.multiselect(
             "Plataformas",
             ["Shopee", "Mercado Livre", "TikTok Shop", "Kwai Shop", "Amazon", "Magalu"],
-            default=["Shopee"]
+            default=["Shopee"],
         )
+
     with ac2:
-        alerta_desconto = st.slider("Desconto mínimo pra alertar", 30, 95, 70, suffix="%")
-        alerta_preco_max = st.number_input("Preço máximo (R$)", min_value=0.0, value=100.0, step=10.0)
+        alerta_desconto = st.slider(
+            "Desconto mínimo pra alertar (%)",
+            min_value=30,
+            max_value=95,
+            value=70,
+            step=1,
+            format="%d%%",
+        )
+        alerta_preco_max = st.number_input(
+            "Preço máximo (R$)",
+            min_value=0.0,
+            value=100.0,
+            step=10.0,
+        )
 
     submitted = st.form_submit_button("✅ Criar Alerta", use_container_width=True)
 
     if submitted:
         if alerta_produto:
-            st.success(f"Alerta criado! Você será notificado quando '{alerta_produto}' tiver desconto de {alerta_desconto}%+ nas plataformas selecionadas.")
+            st.success(
+                f"Alerta criado! Você será notificado quando '{alerta_produto}' tiver desconto de "
+                f"{alerta_desconto}%+ nas plataformas selecionadas."
+            )
         else:
             st.error("Digite o nome do produto ou palavra-chave.")
 
