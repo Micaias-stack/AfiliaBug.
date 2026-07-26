@@ -1,120 +1,154 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="AfiliaBug",
-    page_icon="🐛",
+    page_title="AfiliaBug 🐞",
+    page_icon="🐞",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
-# --- CSS CUSTOM ---
-st.markdown("""
-<style>
-    .main-header {
-        font-size: 3rem;
-        font-weight: 800;
-        background: linear-gradient(90deg, #FF4B4B, #FF8C00);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-align: center;
-        margin-bottom: 0;
-    }
-    .sub-header {
-        text-align: center;
-        color: #AAAAAA;
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-    }
-</style>
-""", unsafe_allow_html=True)
-
 # --- HEADER ---
-st.markdown('<p class="main-header">🐛 AfiliaBug</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-header">Ache preços bugados. Crie vídeos. Lucre como afiliado.</p>', unsafe_allow_html=True)
+h1, h2 = st.columns([1, 11])
+with h1:
+    st.markdown("# 🐞")
+with h2:
+    st.markdown("# AfiliaBug")
+    st.caption("Encontre preços bugados · Gere links · Crie vídeos · Acompanhe resultados")
 
 st.divider()
 
-# --- MÉTRICAS RESUMO ---
-col1, col2, col3, col4 = st.columns(4)
+# --- KPIs RÁPIDOS ---
+st.subheader("📊 Resumo de Hoje")
 
-with col1:
-    st.metric(label="🔥 Bugs Ativos", value="23", delta="+5 hoje")
-with col2:
-    st.metric(label="🔗 Seus Links", value="47", delta="+3 novos")
-with col3:
-    st.metric(label="👆 Cliques Hoje", value="1.2K", delta="+18%")
-with col4:
-    st.metric(label="💰 Comissão Mês", value="R$ 3.450", delta="+R$ 620")
+k1, k2, k3, k4, k5 = st.columns(5)
+with k1:
+    st.metric("Bugs Encontrados", "23", delta="+5 hoje")
+with k2:
+    st.metric("Links Ativos", "47", delta="+3")
+with k3:
+    st.metric("Cliques Hoje", "1.247", delta="+18%")
+with k4:
+    st.metric("Conversões", "89", delta="+12%")
+with k5:
+    st.metric("Comissão do Dia", "R$ 342,50", delta="+22%")
 
 st.divider()
 
-# --- FEED RÁPIDO ---
-st.subheader("⚡ Últimos Preços Bugados")
+# --- DESTAQUES ---
+st.subheader("🔥 Bugs Quentes Agora")
 
-bugs_exemplo = [
-    {
-        "produto": "Fone Bluetooth Lenovo LP40",
-        "plataforma": "Shopee",
-        "preco_original": "R$ 89,90",
-        "preco_bug": "R$ 12,90",
-        "desconto": "86%",
-        "tempo": "3 min atrás"
-    },
-    {
-        "produto": "Tênis Nike Revolution 6",
-        "plataforma": "Mercado Livre",
-        "preco_original": "R$ 349,90",
-        "preco_bug": "R$ 89,90",
-        "desconto": "74%",
-        "tempo": "7 min atrás"
-    },
-    {
-        "produto": "Kit 3 Camisetas Dry Fit",
-        "plataforma": "TikTok Shop",
-        "preco_original": "R$ 129,90",
-        "preco_bug": "R$ 19,90",
-        "desconto": "85%",
-        "tempo": "12 min atrás"
-    },
-    {
-        "produto": "Smartwatch D20 Pro",
-        "plataforma": "Kwai Shop",
-        "preco_original": "R$ 199,90",
-        "preco_bug": "R$ 29,90",
-        "desconto": "85%",
-        "tempo": "18 min atrás"
-    },
+d1, d2, d3 = st.columns(3)
+
+with d1:
+    with st.container(border=True):
+        st.markdown("### 🎧 Fone Bluetooth LP40")
+        st.markdown("~~R$ 89,90~~ → **R$ 12,49**")
+        st.caption("🏪 Shopee · ⏰ Expira em 2h")
+        st.progress(0.86, text="86% vendido")
+        st.button("🔗 Gerar Link", key="bug1", use_container_width=True)
+
+with d2:
+    with st.container(border=True):
+        st.markdown("### 👟 Tênis Nike Revolution 6")
+        st.markdown("~~R$ 349,90~~ → **R$ 89,90**")
+        st.caption("🏪 Mercado Livre · ⏰ Expira em 5h")
+        st.progress(0.72, text="72% vendido")
+        st.button("🔗 Gerar Link", key="bug2", use_container_width=True)
+
+with d3:
+    with st.container(border=True):
+        st.markdown("### 👕 Kit 3 Camisetas Dry Fit")
+        st.markdown("~~R$ 129,90~~ → **R$ 29,70**")
+        st.caption("🏪 TikTok Shop · ⏰ Expira em 8h")
+        st.progress(0.54, text="54% vendido")
+        st.button("🔗 Gerar Link", key="bug3", use_container_width=True)
+
+st.divider()
+
+# --- COMO FUNCIONA ---
+st.subheader("🚀 Como Funciona")
+
+c1, c2, c3, c4 = st.columns(4)
+
+with c1:
+    st.markdown("### 1️⃣ Encontre")
+    st.markdown("Nosso scanner monitora preços bugados em tempo real nas maiores plataformas.")
+
+with c2:
+    st.markdown("### 2️⃣ Gere o Link")
+    st.markdown("Crie seu link de afiliado rastreável com um clique.")
+
+with c3:
+    st.markdown("### 3️⃣ Divulgue")
+    st.markdown("Use nosso editor de vídeo para criar conteúdo pronto para TikTok e Reels.")
+
+with c4:
+    st.markdown("### 4️⃣ Lucre")
+    st.markdown("Acompanhe cliques, conversões e comissões no dashboard em tempo real.")
+
+st.divider()
+
+# --- PLATAFORMAS ---
+st.subheader("🏪 Plataformas Monitoradas")
+
+p1, p2, p3, p4, p5, p6 = st.columns(6)
+with p1:
+    st.markdown("#### 🟠 Shopee")
+    st.caption("234 bugs ativos")
+with p2:
+    st.markdown("#### 🔵 Mercado Livre")
+    st.caption("189 bugs ativos")
+with p3:
+    st.markdown("#### ⚫ TikTok Shop")
+    st.caption("156 bugs ativos")
+with p4:
+    st.markdown("#### 🟡 Kwai Shop")
+    st.caption("98 bugs ativos")
+with p5:
+    st.markdown("#### 🟤 Amazon")
+    st.caption("142 bugs ativos")
+with p6:
+    st.markdown("#### 🔴 Magalu")
+    st.caption("87 bugs ativos")
+
+st.divider()
+
+# --- RANKING ---
+st.subheader("🏆 Top Afiliados da Semana")
+
+ranking = [
+    {"pos": "🥇", "nome": "Ana Silva", "vendas": 234, "comissao": "R$ 4.521,30"},
+    {"pos": "🥈", "nome": "Carlos Tech", "vendas": 198, "comissao": "R$ 3.890,00"},
+    {"pos": "🥉", "nome": "Julia Moda", "vendas": 176, "comissao": "R$ 3.245,80"},
+    {"pos": "4º", "nome": "Pedro Gamer", "vendas": 154, "comissao": "R$ 2.980,50"},
+    {"pos": "5º", "nome": "Mari Beleza", "vendas": 143, "comissao": "R$ 2.670,20"},
 ]
 
-for bug in bugs_exemplo:
-    with st.container():
-        c1, c2, c3, c4 = st.columns([3, 1.5, 1.5, 1])
-        with c1:
-            st.markdown(f"**{bug['produto']}**")
-            st.caption(f"📍 {bug['plataforma']} · {bug['tempo']}")
-        with c2:
-            st.markdown(f"~{bug['preco_original']}~")
-            st.markdown(f"**🔴 {bug['preco_bug']}**")
-        with c3:
-            st.markdown(f"### -{bug['desconto']}")
-        with c4:
-            st.button("🔗 Gerar Link", key=f"btn_{bug['produto']}")
-        st.divider()
+for r in ranking:
+    rc1, rc2, rc3, rc4 = st.columns([0.5, 3, 1.5, 1.5])
+    with rc1:
+        st.markdown(f"**{r['pos']}**")
+    with rc2:
+        st.markdown(f"**{r['nome']}**")
+    with rc3:
+        st.markdown(f"🛒 {r['vendas']} vendas")
+    with rc4:
+        st.markdown(f"💰 {r['comissao']}")
+
+st.divider()
 
 # --- SIDEBAR ---
 with st.sidebar:
-    st.markdown("## 🐛 AfiliaBug")
+    st.markdown("### 🐞 AfiliaBug")
+    st.caption("v1.0.0 · Beta")
     st.divider()
-    st.markdown("### ⚙️ Suas Plataformas")
-    st.checkbox("Shopee", value=True)
-    st.checkbox("Mercado Livre", value=True)
-    st.checkbox("TikTok Shop", value=True)
-    st.checkbox("Kwai Shop", value=True)
-    st.checkbox("Amazon", value=False)
-    st.checkbox("Magalu", value=False)
+    st.markdown("### ⚡ Acesso Rápido")
+    st.page_link("pages/1_🔥_Precos_Bugados.py", label="🔥 Preços Bugados", icon="🔥")
+    st.page_link("pages/2_🎬_Editor_Video.py", label="🎬 Editor de Vídeo", icon="🎬")
+    st.page_link("pages/3_📊_Dashboard.py", label="📊 Dashboard", icon="📊")
+    st.page_link("pages/4_🔗_Meus_Links.py", label="🔗 Meus Links", icon="🔗")
     st.divider()
-    st.markdown("### 🔔 Notificações")
-    st.toggle("Push de Preço Bugado", value=True)
-    st.slider("Desconto mínimo pra alertar", 30, 90, 60, suffix="%")
-    st.divider()
-    st.caption("AfiliaBug v1.0 · Feito para afiliados 🚀")
+    st.markdown("### 📈 Status do Scanner")
+    st.success("✅ Scanner ativo")
+    st.caption("Última varredura: há 3 min")
+    st.caption("Próxima varredura: em 2 min")
